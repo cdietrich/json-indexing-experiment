@@ -5,6 +5,7 @@ import { HelloWorldValidator, registerValidationChecks } from './hello-world-val
 import { HelloWorldDocumentUpdateHandler } from './hello-world-document-update-handler.js';
 import { HelloWorldGrammar } from './generated/grammar.js';
 import { JsonAsyncParser } from './json-async-parser.js';
+import { ServiceRegistryExtended } from './extended-service-registry.js';
 
 /**
  * Declaration of custom services - add your own service classes here.
@@ -57,7 +58,8 @@ export function createHelloWorldServices(context: DefaultSharedModuleContext): {
         {
             lsp: {
                 DocumentUpdateHandler: (services) => new HelloWorldDocumentUpdateHandler(services),
-            }
+            },
+            ServiceRegistry: services => new ServiceRegistryExtended(services)
         }
     );
     const HelloWorld = inject(
