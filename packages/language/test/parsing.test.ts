@@ -19,6 +19,13 @@ beforeAll(async () => {
 
 describe('Parsing tests', () => {
 
+    test('parse json', async () => {
+        document = await parse(`{"name": "Langium"}`, { documentUri: "demo.test.json" });
+        const v = document.parseResult.value;
+        const clean = JSON.parse(services.HelloWorld.serializer.JsonSerializer.serialize(v));
+        expect(clean).toEqual({ name: "Langium", $type: "Person" });
+    });
+
     test('parse simple Model', async () => {
         document = await parse(`
             person Langium

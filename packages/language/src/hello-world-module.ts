@@ -4,7 +4,7 @@ import { HelloWorldGeneratedModule, HelloWorldGeneratedSharedModule } from './ge
 import { HelloWorldValidator, registerValidationChecks } from './hello-world-validator.js';
 import { HelloWorldDocumentUpdateHandler } from './hello-world-document-update-handler.js';
 import { HelloWorldGrammar } from './generated/grammar.js';
-import { JsonAsyncParser } from './json-async-parser.js';
+import { JsonAsyncParser, JsonLangiumParser } from './json-async-parser.js';
 import { ServiceRegistryExtended } from './extended-service-registry.js';
 
 /**
@@ -80,6 +80,7 @@ export function createHelloWorldServices(context: DefaultSharedModuleContext): {
             LanguageMetaData: () => JsonLanguageMetaData,
             parser: {
                 AsyncParser: () => new JsonAsyncParser(),
+                LangiumParser: (services) => new JsonLangiumParser(services)
             }
         },
         //HelloWorldModule
